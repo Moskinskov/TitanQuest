@@ -3,31 +3,29 @@ using UnityEngine.AI;
 
 public class UnitAnimation : MonoBehaviour
 {
-	[SerializeField] Animator _animator;
-	[SerializeField] NavMeshAgent _agent;
-	private static readonly int Moving = Animator.StringToHash("Moving");
+    [SerializeField] private Animator _animator;
+    [SerializeField] private NavMeshAgent _agent;
 
-	private void OnValidate()
-	{
-		_animator = GetComponent<Animator>();
-		_agent = GetComponentInParent<NavMeshAgent>();
-	}
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+        _agent = GetComponentInParent<NavMeshAgent>();
+    }
 
-	private void FixedUpdate()
-	{
-		_animator.SetBool(Moving, _agent.hasPath);
-	}
+    private void FixedUpdate()
+    {
+        _animator.SetBool("MOVING", _agent.hasPath);
+    }
 
-	//Placeholder functions for Animation events
-	void Hit()
-	{
-	}
+    private void Hit()
+    {
+    }
 
-	void FootR()
-	{
-	}
+    private void FootR()
+    {
+    }
 
-	void FootL()
-	{
-	}
+    private void FootL()
+    {
+    }
 }

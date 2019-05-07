@@ -231,10 +231,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Full Anim
-      takeName: Default Take
-      firstFrame: 0
-      lastFrame: 229
+      name: Animation
+      takeName: Animation
+      firstFrame: -10
+      lastFrame: 230
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1088,6 +1088,7 @@ ModelImporter:
     globalScale: 100
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
@@ -1112,6 +1113,9 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 4
     normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
