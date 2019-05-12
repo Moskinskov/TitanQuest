@@ -2,7 +2,7 @@
 
 public class CameraController : MonoBehaviour
 {
-	[SerializeField] private Transform _mTarget;
+	private Transform _mTarget;
 	[SerializeField] private Vector3 _offset;
 	[SerializeField] private float _zoomSpeed = 4f;
 	[SerializeField] private float _minZoom = 5f;
@@ -16,15 +16,10 @@ public class CameraController : MonoBehaviour
 
 	public Transform Target { set { _mTarget = value; } }
 
-
-	private void OnValidate()
-	{
-		_mTarget = FindObjectOfType<PlayerController>().transform;
-	}
-
 	private void Start()
 	{
 		_mTransform = transform;
+		_mTarget = FindObjectOfType<PlayerController>().transform;
 	}
 
 	private void Update()

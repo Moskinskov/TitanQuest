@@ -1,37 +1,54 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts;
+using UnityEngine;
+using UnityEngine.Networking;
 
-[RequireComponent(typeof(UnitMotor))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
-	[SerializeField] private LayerMask _movementMask;
+    [SerializeField] private LayerMask movementMask;
 
-	private Camera _cam;
-	private UnitMotor _motor;
+    private Camera cam;
+    private Character character;
 
-	private void Start()
-	{
-		_cam = Camera.main;
-		_motor = GetComponent<UnitMotor>();
-		_cam.GetComponent<CameraController>().Target = transform;
-	}
+    private void Awake()
+    {
+        cam = Camera.main;
+    }
 
-	private void Update()
-	{
-		if (Input.GetMouseButtonDown(1))
-		{
-			if (Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out var hit,
-				100f, _movementMask))
-			{
-				_motor.MoveToPoint(hit.point);
-			}
-		}
+    public void SetCharacter(Character character, bool isLocalPlayer)
+    {
+        this.character = character;
+        if (isLocalPlayer)
+            cam.GetComponent<CameraController>().Target = character.transform;
+    }
 
-		if (Input.GetMouseButtonDown(0))
-		{
-			if (Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out _, 100f))
-			{
+    [Command]
+    public void CmdSetMovePoint(Vector3 point)
+    {
+        character.SetMovePoint(point);
+    }
 
-			}
-		}
-	}
+
+    private void Update()
+    {
+        if (isLocalPlayer)
+        {
+            if (character != null)
+            {
+                if (Input.GetMouseButtonDown(1))
+                {
+                    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out RaycastHit hit, 100f, movementMask))
+                    {
+                        CmdSetMovePoint(hit.point);
+                    }
+                }
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(character?.gameObject);
+    }
+
 }

@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 
 public class UnitAnimation : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
+    [SerializeField, SyncVar] private Animator _animator;
     [SerializeField] private NavMeshAgent _agent;
 
     private void Start()
@@ -14,7 +15,7 @@ public class UnitAnimation : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _animator.SetBool("MOVING", _agent.hasPath);
+        _animator.SetBool("MOVING", _agent.velocity.magnitude != 0);
     }
 
     private void Hit()
