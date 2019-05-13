@@ -62,12 +62,14 @@ namespace Assets.Scripts
         #endregion
 
         #region Server's methods
-        
+
         [ClientRpc]
         private void RpcDie()
         {
             if (!isServer)
+            {
                 Die();
+            }
         }
         [ClientRpc]
         private void RpcRevive()
