@@ -1,31 +1,28 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class UnitAnimation : MonoBehaviour
+namespace Assets.Scripts
 {
-    [SerializeField] private Animator _animator;
-    [SerializeField] private NavMeshAgent _agent;
-
-    private void Start()
+    public class UnitAnimation : MonoBehaviour
     {
-        _animator = GetComponent<Animator>();
-        _agent = GetComponentInParent<NavMeshAgent>();
-    }
+        [SerializeField] private Animator _animator;
+        [SerializeField] private NavMeshAgent _agent;
 
-    private void FixedUpdate()
-    {
-        _animator.SetBool("MOVING", _agent.hasPath);
-    }
+        private void FixedUpdate()
+        {
+            _animator?.SetBool("MOVING", _agent?.velocity.magnitude != 0);
+        }
 
-    private void Hit()
-    {
-    }
+        private void Hit()
+        {
+        }
 
-    private void FootR()
-    {
-    }
+        private void FootR()
+        {
+        }
 
-    private void FootL()
-    {
+        private void FootL()
+        {
+        }
     }
 }

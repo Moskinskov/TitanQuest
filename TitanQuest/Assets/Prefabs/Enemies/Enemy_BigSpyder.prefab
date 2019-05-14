@@ -99,8 +99,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4286821109301113408}
   m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: 130cac6b96af6214296215324b5da188, type: 3}
-  m_Controller: {fileID: 9100000, guid: 9c8231a9beabb94449c667ef1acff171, type: 2}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -309,6 +309,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SPIDER
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 130cac6b96af6214296215324b5da188, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9c8231a9beabb94449c667ef1acff171, type: 2}
+    - target: {fileID: 9500000, guid: 130cac6b96af6214296215324b5da188, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400098, guid: 130cac6b96af6214296215324b5da188, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -363,14 +371,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400098, guid: 130cac6b96af6214296215324b5da188, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 130cac6b96af6214296215324b5da188, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 9c8231a9beabb94449c667ef1acff171, type: 2}
-    - target: {fileID: 9500000, guid: 130cac6b96af6214296215324b5da188, type: 3}
-      propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
