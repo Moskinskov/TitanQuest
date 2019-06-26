@@ -10,7 +10,14 @@ namespace Assets.Scripts
 
         private void FixedUpdate()
         {
-            _animator?.SetBool("MOVING", _agent?.velocity.magnitude != 0);
+            if (_agent.velocity.magnitude == 0)
+            {
+                _animator.SetTrigger("Idle");
+            }
+            else
+            {
+                _animator.SetTrigger("Move");
+            }
         }
 
         private void Hit()

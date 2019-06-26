@@ -9,6 +9,8 @@ namespace Assets.Scripts
         private Vector3 startPosition;
         private float reviveTime;
 
+        public Inventory _inventory;
+
         private void Start()
         {
             startPosition = transform.position;
@@ -16,6 +18,7 @@ namespace Assets.Scripts
         }
 
         #region Overrided methods
+
         /// <summary>
         /// Player's 'OnDeadUpdate'
         /// </summary>
@@ -30,6 +33,33 @@ namespace Assets.Scripts
                 Revive();
             }
         }
+
+        protected override void OnAliveUpdate()
+        {
+            base.OnAliveUpdate();
+            if (focusObject != null)
+            {
+                if (!focusObject.HasInteract)
+                {
+                    RemoveFocus();
+                }
+                else
+                {
+                    var tempVector = focusObject.interactionTransform.position - transform.position;
+                    var tempSqrDistance = tempVector.sqrMagnitude;
+                    if (tempSqrDistance > Mathf.Pow(focusObject.radius, 2) || !focusObject.HasInteract)
+                    {
+                        RemoveFocus();
+                    }
+                    else if (tempSqrDistance <= Mathf.Pow(focusObject.radius, 2))
+                    {
+                        if (focusObject.Interact(gameObject))
+                            RemoveFocus();
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Player's 'Revive'
         /// </summary>
@@ -42,8 +72,8 @@ namespace Assets.Scripts
             {
                 motor.MoveToPoint(startPosition);
             }
-
         }
+
         /// <summary>
         /// Player's 'Die'
         /// </summary>
@@ -52,6 +82,7 @@ namespace Assets.Scripts
             base.Die();
             gfx.SetActive(false);
         }
+
         #endregion
 
         #region Public methods
@@ -60,6 +91,23 @@ namespace Assets.Scripts
         {
             if (!isDead)
                 motor.MoveToPoint(point);
+        }
+
+        public void SetNewFocus(Interactable newFocus)
+        {
+            if (!isDead)
+            {
+                if (newFocus.HasInteract)
+                {
+                    SetFocus(newFocus);
+                }
+            }
+        }
+
+        public void SetInventory(Inventory inventory)
+        {
+            _inventory = inventory;
+            inventory.dropPoint = transform;
         }
 
         #endregion

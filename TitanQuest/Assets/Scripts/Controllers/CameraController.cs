@@ -19,7 +19,6 @@ public class CameraController : MonoBehaviour
 	private void Start()
 	{
 		_mTransform = transform;
-		_mTarget = FindObjectOfType<PlayerController>().transform;
 	}
 
 	private void Update()

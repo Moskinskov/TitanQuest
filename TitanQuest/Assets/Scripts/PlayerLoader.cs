@@ -14,15 +14,11 @@ namespace Assets.Scripts
         {
             if (isServer)
             {
-                GameObject unit = Instantiate(unitPrefab);
-                NetworkServer.Spawn(unit);
-                unitIdentity = unit.GetComponent<NetworkIdentity>();
-                playerController.SetCharacter(unit.GetComponent<Character>(), true);
+                Character character = CreateCharacter();
+                playerController.SetCharacter(character, true);
+                InventoryUI.instance.SetInventory(character._inventory);
             }
-            else
-            {
-                CmdCreatePlayer();
-            }
+            else CmdCreatePlayer();
         }
         [Command]
         private void CmdCreatePlayer()
@@ -42,8 +38,25 @@ namespace Assets.Scripts
             if (isLocalPlayer)
             {
                 unitIdentity = unit;
-                playerController.SetCharacter(unit.GetComponent<Character>(), true);
+                Character character = unit.GetComponent<Character>();
+                playerController.SetCharacter(character, true);
+                character.SetInventory(GetComponent<Inventory>());
+                InventoryUI.instance.SetInventory(character._inventory);
             }
+        }
+
+        public Character CreateCharacter()
+        {
+            GameObject unit = Instantiate(unitPrefab);
+            NetworkServer.Spawn(unit);
+            unitIdentity = unit.GetComponent<NetworkIdentity>();
+            unit.GetComponent<Character>().SetInventory(GetComponent<Inventory>());
+            return unit.GetComponent<Character>();
+        }
+
+        public override bool OnCheckObserver(NetworkConnection conn)
+        {
+            return false;
         }
     }
 }

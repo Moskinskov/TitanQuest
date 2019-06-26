@@ -27,6 +27,11 @@ public class PlayerController : NetworkBehaviour
         character.SetMovePoint(point);
     }
 
+    [Command]
+    public void CmdSetFocus(NetworkIdentity newFocus)
+    {
+        character.SetNewFocus(newFocus.GetComponent<Interactable>());
+    }
 
     private void Update()
     {
@@ -34,12 +39,26 @@ public class PlayerController : NetworkBehaviour
         {
             if (character != null)
             {
+
                 if (Input.GetMouseButtonDown(1))
                 {
                     Ray ray = cam.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray, out RaycastHit hit, 100f, movementMask))
                     {
                         CmdSetMovePoint(hit.point);
+                    }
+                }
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out RaycastHit hit, 100f, LayerMask.NameToLayer("Enemy")))
+                    {
+                        Interactable interactable = hit.collider.GetComponent<Interactable>();
+                        if (interactable != null)
+                        {
+                            CmdSetFocus(interactable.GetComponent<NetworkIdentity>());
+                        }
                     }
                 }
             }
@@ -50,5 +69,4 @@ public class PlayerController : NetworkBehaviour
     {
         Destroy(character?.gameObject);
     }
-
 }

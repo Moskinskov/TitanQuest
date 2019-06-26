@@ -30,5 +30,14 @@ namespace Assets.Scripts
         {
             currentHealth = maxHealth;
         }
+
+        public void TakeDamage(int damage)
+        {
+            currentHealth -= damage;
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+            }
+        }
     }
 }

@@ -53,8 +53,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Noise:
         m_Texture: {fileID: 2800000, guid: a04d65dde083b6a4b9d5e18993883e25, type: 3}
-        m_Scale: {x: 3, y: 3}
-        m_Offset: {x: 10, y: 10}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 100, y: 10}
     - _Normal:
         m_Texture: {fileID: 2800000, guid: c09c20f04466ce049a0d45eb05d909b6, type: 3}
         m_Scale: {x: 5, y: 5}
@@ -82,9 +82,9 @@ Material:
     - _DstBlend: 0
     - _Edge: 10
     - _Fade: 5
-    - _Fog: 20
+    - _Fog: 10
     - _GlossMapScale: 1
-    - _Glossiness: 0.853
+    - _Glossiness: 0
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
